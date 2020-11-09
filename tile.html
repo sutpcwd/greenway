@@ -293,7 +293,7 @@
         var selectedLayer = document.getElementById("selectedLayer");
         selectedLayer.addEventListener("change", function () {
             console.log(this.options[this.options.selectedIndex].text)
-            if(this.options[this.options.selectedIndex].text == '廊道5'){
+            if(this.options[this.options.selectedIndex].text == '廊道5-福永大型城市绿廊'){
                 var cam = new Camera({
                 position: new Point({
                     x: 12667907.721876847,
@@ -305,8 +305,8 @@
                   tilt: 0.49929858290927887      // bird's eye view
                 });
                 view.goTo(cam);
-                window.parent.logInformation('廊道5');
-            }else if(this.options[this.options.selectedIndex].text == '廊道10'){
+                window.parent.logInformation('廊道5-福永大型城市绿廊');
+            }else if(this.options[this.options.selectedIndex].text == '廊道10-笔架山大型城市绿廊'){
               var cam = new Camera({
                 position: new Point({
                   x: 12698564.191291625,
@@ -318,8 +318,8 @@
                 tilt: 0.4992190910948526      // bird's eye view
               });
               view.goTo(cam);
-              window.parent.logInformation('廊道10');
-            }else if(this.options[this.options.selectedIndex].text == '廊道16'){
+              window.parent.logInformation('廊道10-笔架山大型城市绿廊');
+            }else if(this.options[this.options.selectedIndex].text == '廊道16-平湖横岗生态廊道'){
                 var cam = new Camera({
                   position: new Point({
                     x: 12705090.61349802,
@@ -331,7 +331,7 @@
                   tilt: 0.49953537587559954      // bird's eye view
                 });
                 view.goTo(cam);
-                window.parent.logInformation('廊道16');
+                window.parent.logInformation('廊道16-平湖横岗生态廊道');
             }
         })
 
