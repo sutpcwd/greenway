@@ -31,6 +31,13 @@ ul,ol{
 .allnav{
     height: 100%;
 }
+.allnav2{
+    height: 50%;
+}
+.allnav3{
+    height: 90%;
+    width: 90;
+}
 .main{
     /*width: 100%;
     height: 100%;
@@ -92,7 +99,7 @@ ul,ol{
 }
 .content .content-left .left-top{
     width: 100%;
-    height: 3.2rem;
+    height: 2.2rem;
     /*border: 1px solid gold;*/
     margin-bottom: .2rem;
 }
@@ -133,13 +140,13 @@ ul,ol{
 }
 .content .content-left .left-center{
     width: 100%;
-    height: 3.2rem;
+    height: 3.7rem;
     /*border: 1px solid gold;*/
     margin-bottom: .2rem;
 }
 .content .content-left .left-bottom{
     width: 100%;
-    height: 3.2rem;
+    height: 3.7rem;
    /* border: 1px solid gold;*/
 }
 
@@ -154,14 +161,14 @@ ul,ol{
 }
 .content .content-center .center-top{
     width: 100%;
-    height: 6.5rem;
+    height: 8.6rem;
     /*border: 1px solid red;*/
     background: url("../images/a.png") no-repeat;
     background-size: 100% 100%;
     box-sizing: border-box;
     margin-bottom: .3rem;
     position: relative;
-    padding: 0.3rem;
+    padding: 0.2rem;
 }
 
 .content .content-center .center-top .top-title{

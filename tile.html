@@ -62,10 +62,10 @@
          *****************************************************************/
         var transportationLayer = new TileLayer({
           url:
-            "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer",
+            "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer",
           // This property can be used to uniquely identify the layer
-          id: "streets",
-          visible: false
+          // id: "streets",
+          // visible: false
         });
 
         var housingLayer = new TileLayer({
@@ -86,7 +86,14 @@
         var greenLayer = new TileLayer({
           url:
             "https://tiles.arcgis.com/tiles/ugDnVj5M1UVViols/arcgis/rest/services/szgreenway/MapServer",
-          id: "szdistric",
+          id: "szgreenway",
+          opacity: 0.7,
+        });
+
+        var greenLayer2 = new TileLayer({
+          url:
+            "https://tiles.arcgis.com/tiles/ugDnVj5M1UVViols/arcgis/rest/services/szshp3/MapServer",
+          id: "szshp3",
           opacity: 0.5,
         });
 
@@ -126,13 +133,13 @@
        
         var map = new Map({
           basemap: "oceans",
-          layers: [housingLayer,districtLayer,greenLayer,pointLayer2,pointLayer3,pointLayer4],
+          layers: [transportationLayer,housingLayer,districtLayer,greenLayer,greenLayer2,pointLayer2,pointLayer3,pointLayer4],
           logo:false,//删除logo
           slider:false//删除滚动条滑块
         });
 
-        map.add(transportationLayer);
-
+        // map.add(transportationLayer);
+        // map.add(housingLayer)
         var view = new SceneView({
           container: "viewDiv",
           map: map
