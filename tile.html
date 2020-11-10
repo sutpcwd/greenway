@@ -375,6 +375,32 @@
                 typeRendererCreator.createPCClassRenderer(params2)
                   .then(function(response){
                     pointLayer2.renderer = response.renderer;
+                    pointLayer2.renderer.colorUniqueValueInfos = [
+                      {
+                        values: ["0"],
+                        label: "Unassigned",
+                        color: [178, 178, 178]
+                      },
+                      {
+                        values: ["1"],
+                        label: "High vegetation",
+                        color: [34,170,0]
+                      },
+                      {
+                        values: ["2"],
+                        label: "Low vegetation",
+                        color: [160,255,136]
+                      },
+                      {
+                        values: ["3"],
+                        label: "Ground",
+                        color: [238,48,0]
+                      },
+                      {
+                        values: ["4"],
+                        label: "Water",
+                        color: [0,48,238]
+                      }]
                   });
                   var params3 = {
                   layer: pointLayer3,
@@ -383,6 +409,32 @@
                 typeRendererCreator.createPCClassRenderer(params3)
                   .then(function(response){
                     pointLayer3.renderer = response.renderer;
+                    pointLayer3.renderer.colorUniqueValueInfos = [
+                      {
+                        values: ["0"],
+                        label: "Unassigned",
+                        color: [178, 178, 178]
+                      },
+                      {
+                        values: ["1"],
+                        label: "High vegetation",
+                        color: [34,170,0]
+                      },
+                      {
+                        values: ["2"],
+                        label: "Low vegetation",
+                        color: [160,255,136]
+                      },
+                      {
+                        values: ["3"],
+                        label: "Ground",
+                        color: [238,48,0]
+                      },
+                      {
+                        values: ["4"],
+                        label: "Water",
+                        color: [0,48,238]
+                      }]
                   });
                 var params4 = {
                   layer: pointLayer4,
@@ -391,6 +443,32 @@
                 typeRendererCreator.createPCClassRenderer(params4)
                   .then(function(response){
                     pointLayer4.renderer = response.renderer;
+                    pointLayer4.renderer.colorUniqueValueInfos = [
+                      {
+                        values: ["0"],
+                        label: "Unassigned",
+                        color: [178, 178, 178]
+                      },
+                      {
+                        values: ["1"],
+                        label: "High vegetation",
+                        color: [34,170,0]
+                      },
+                      {
+                        values: ["2"],
+                        label: "Low vegetation",
+                        color: [160,255,136]
+                      },
+                      {
+                        values: ["3"],
+                        label: "Ground",
+                        color: [238,48,0]
+                      },
+                      {
+                        values: ["4"],
+                        label: "Water",
+                        color: [0,48,238]
+                      }]
                   });
               }else if(fieldName == "ELEVATION"){
                   var params2 = {
