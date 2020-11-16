@@ -1,0 +1,214 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <!--
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the intro-layers sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/latest/sample-code/intro-layers/index.html
+  -->
+<title>Intro to layers | Sample | ArcGIS API for JavaScript 4.17</title>
+
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.17/esri/themes/light/main.css"
+    />
+    <script src="https://js.arcgis.com/4.17/"></script>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #layerToggle {
+        top: 20px;
+        right: 20px;
+        position: absolute;
+        z-index: 99;
+        background-color: white;
+        border-radius: 8px;
+        padding: 10px;
+        opacity: 0.75;
+      }
+      .esri-attribution {
+        display: none;
+      }
+    </style>
+
+    <script>
+      require([
+        "esri/Map",
+        "esri/views/SceneView",
+        "esri/layers/TileLayer",
+        "esri/layers/PointCloudLayer",
+        "esri/smartMapping/renderers/color",
+        "esri/smartMapping/renderers/type",
+        "esri/widgets/Legend",
+        "esri/Camera",
+        "esri/geometry/Point",
+        "esri/layers/FeatureLayer",
+      ], function (Map, SceneView, TileLayer,PointCloudLayer,colorRendererCreator,typeRendererCreator,Legend,Camera,Point,FeatureLayer) {
+        /*****************************************************************
+         * Create two TileLayer instances. One pointing to a
+         * cached map service depicting U.S. male population and the other
+         * pointing to a layer of roads and highways.
+         *****************************************************************/
+        var transportationLayer = new TileLayer({
+          url:
+            "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer",
+          // This property can be used to uniquely identify the layer
+          // id: "streets",
+          // visible: false
+        });
+
+        var housingLayer = new TileLayer({
+          url:
+            "https://tiles.arcgis.com/tiles/ugDnVj5M1UVViols/arcgis/rest/services/szwgsmer/MapServer",
+          id: "szwgsmer",
+          opacity: 0.9,
+          maxScale:15,
+        });
+
+        var districtLayer = new TileLayer({
+          url:
+            "https://tiles.arcgis.com/tiles/ugDnVj5M1UVViols/arcgis/rest/services/szdistric_wgs84/MapServer",
+          id: "szdistric",
+          opacity: 0.9,
+        });
+
+        var greenLayer = new TileLayer({
+          url:
+            "https://tiles.arcgis.com/tiles/ugDnVj5M1UVViols/arcgis/rest/services/szgreenway/MapServer",
+          id: "szgreenway",
+          opacity: 0.7,
+        });
+
+        var greenLayer2 = new TileLayer({
+          url:
+            "https://tiles.arcgis.com/tiles/ugDnVj5M1UVViols/arcgis/rest/services/szshp3/MapServer",
+          id: "szshp3",
+          opacity: 0.5,
+        });
+
+        var pointLayer = new PointCloudLayer({
+          portalItem: {
+            id: "c187e70e63144bae8b0f4cb49029b8a2"
+          }
+        });
+
+        var pointLayer2 = new PointCloudLayer({
+          portalItem: {
+            id: "331e0176ad7340a28592dd008782dd65"
+          }
+        });
+
+        var pointLayer3 = new PointCloudLayer({
+          portalItem: {
+            id: "bff4f1a1f2954011b4a500711fc5fe71"
+          }
+        });
+
+        var pointLayer4 = new PointCloudLayer({
+          portalItem: {
+            id: "569226a4f9784cb78a66620200c4270e"
+          }
+        });
+
+        // var params = {
+        //   layer: pointLayer,
+        //   field: "CLASS_CODE"
+        // };
+
+        // typeRendererCreator.createPCClassRenderer(params)
+        //   .then(function(response){
+        //     pointLayer.renderer = response.renderer;
+        //   });
+       
+        var FeatureLayer = new FeatureLayer({
+          // autocasts as new PortalItem()
+          portalItem: {
+            id: "0659820025df452c9bfbd6be42776ca2"
+          },
+          outFields: ["*"]
+        });
+
+        
+        var map = new Map({
+          basemap: "oceans",
+          layers: [transportationLayer,FeatureLayer],
+          logo:false,//删除logo
+          slider:false//删除滚动条滑块
+        });
+
+        // map.add(transportationLayer);
+        // map.add(housingLayer)
+        var view = new SceneView({
+          container: "viewDiv",
+          map: map,
+          popup: {
+            dockEnabled: true,
+            dockOptions: {
+              // dock popup at bottom-right side of view
+              buttonEnabled: false,
+              breakpoint: false,
+            }
+          }
+        });
+        //标注
+        // view.ui.add(
+        //   new Legend({
+        //     view: view
+        //   }),
+        //   "bottom-right"
+        // );
+
+        /*****************************************************************
+         * The map handles the layers' data while the view and layer views
+         * take care of renderering the layers
+         *****************************************************************/
+
+        view.when(function () {
+          FeatureLayer.when(function () {
+            view.goTo(FeatureLayer.fullExtent).catch(function (error) {
+              if (error.name != "AbortError") {
+                console.error(error);
+              }
+            });
+          });
+
+          const returnFilter = {
+            type: "return",
+            field: "RETURNS",
+            includedReturns: ["single"]
+        };
+        console.log(pointLayer2)
+        const buildingsFilter = [
+          {
+            type: "value",
+            field: "CLASS_CODE",
+            mode: "include",
+            // only the building value is passed
+            values: [3,4]
+          }
+        ];
+        pointLayer2.filters = returnFilter;
+        });
+
+      });
+
+      
+    </script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>    
+  </body>
+</html>
