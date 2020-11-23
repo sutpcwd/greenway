@@ -17,7 +17,7 @@
       href="https://js.arcgis.com/4.17/esri/themes/light/main.css"
     />
     <script src="https://js.arcgis.com/4.17/"></script>
-
+    <script src="js/jquery.js"></script>
     <style>
       html,
       body,
@@ -41,6 +41,9 @@
       .esri-attribution {
         display: none;
       }
+      .esri-ui .esri-popup{
+        display: none;
+      }
     </style>
 
     <script>
@@ -54,7 +57,12 @@
         "esri/widgets/Legend",
         "esri/Camera",
         "esri/geometry/Point",
-      ], function (Map, SceneView, TileLayer,PointCloudLayer,colorRendererCreator,typeRendererCreator,Legend,Camera,Point) {
+        "esri/layers/FeatureLayer",
+        "esri/tasks/support/Query",
+        "esri/tasks/QueryTask",
+        "esri/popup/content/CustomContent",
+        "esri/PopupTemplate",
+      ], function (Map, SceneView, TileLayer,PointCloudLayer,colorRendererCreator,typeRendererCreator,Legend,Camera,Point,FeatureLayer,Query,QueryTask,CustomContent,PopupTemplate) {
         /*****************************************************************
          * Create two TileLayer instances. One pointing to a
          * cached map service depicting U.S. male population and the other
@@ -121,6 +129,13 @@
           }
         });
 
+        var FeatureLayer20 = new FeatureLayer({
+            // autocasts as new PortalItem()
+            portalItem: {
+              id: "3dc1464243a94343906d5a8d0e6fc5e0"
+            },
+            outFields: ["*"]
+          });
         // var params = {
         //   layer: pointLayer,
         //   field: "CLASS_CODE"
@@ -142,7 +157,15 @@
         // map.add(housingLayer)
         var view = new SceneView({
           container: "viewDiv",
-          map: map
+          map: map,
+          popup: {
+            defaultPopupTemplateEnabled: false,
+            dockEnabled: true,
+            dockOptions: {
+              buttonEnabled: false,
+              breakpoint: false
+            }
+          }
         });
         //标注
         // view.ui.add(
@@ -505,11 +528,175 @@
               }
             });
           }
+
+          // const query = new Query({
+          //       geometry: ["*"],
+          //       groupByFieldsForStatistics: ["LEVEL_"],
+          //       outFields: ["*"],
+          //       spatialRelationship: "intersects",
+          //     });
+          const queryPrivateSchoolsTask = new QueryTask({
+            url:
+              "https://services6.arcgis.com/ugDnVj5M1UVViols/ArcGIS/rest/services/Grid20/FeatureServer/0"
+          });
+          // queryPrivateSchoolsTask
+          //       .execute(query)
+          //       .then(function (result) {
+          //         console.log(result)
+          //       })
+
+          // const contentPromise = new CustomContent({
+          //   outFields: ["*"],
+          //   creator: function (event) {
+          //     // Generage stats for the count and types of private schools that intersect the state with average enrollment
+          //     // const levelCount = new StatisticDefinition({
+          //     //   statisticType: "count",
+          //     //   onStatisticField: "LEVEL_",
+          //     //   outStatisticFieldName: "level_count"
+          //     // });
+
+          //     // const enrollmentAvg = new StatisticDefinition({
+          //     //   statisticType: "avg",
+          //     //   onStatisticField: "ENROLLMENT",
+          //     //   outStatisticFieldName: "enroll_avg"
+          //     // });
+          //     console.log(event)
+          //     const query = new Query({
+          //       geometry: event.graphic.geometry,
+               
+          //       outFields: ["*"],
+               
+          //       // outStatistics: [levelCount, enrollmentAvg]
+          //     });
+
+          //     // Check if the (school type) LEVEL_ is a specific value, if, return the enrollment average for that level and the count of features for it
+          //     queryPrivateSchoolsTask
+          //       .execute(query)
+          //       .then(function (result) {
+          //         console.log("result",result.features)
+          //         for( let i in result.features){
+          //           console.log(result.features[i].attributes.FID)
+          //         }
+          //       })
+          //     // Execute the QueryTask
+          //     return queryPrivateSchoolsTask
+          //       .execute(query)
+          //       .then(function (result) {
+          //         // console.log("result",result.features)
+          //         // Returns the entire result, need to filter based on LEVEL_
+          //         // const featureAttributes = result.features.map(function (
+          //         //   item,
+          //         //   i
+          //         // ) {
+          //         //   return item.attributes;
+          //         // });
+
+          //         // // Loop through all the feature attributes and check for the school level (elementary, secondary, or combined)
+          //         // featureAttributes.forEach(function (attribute) {
+          //         //   switch (attribute.LEVEL_) {
+          //         //     case "Elementary":
+          //         //       stats.elemCount = attribute.level_count;
+          //         //       stats.elemAvg = attribute.enroll_avg;
+          //         //       // Format the average to remove decimal places
+          //         //       stats.elemAvgFormatted = intl.formatNumber(
+          //         //         stats.elemAvg,
+          //         //         {
+          //         //           maximumFractionDigits: 0
+          //         //         }
+          //         //       );
+          //         //       break;
+          //         //     case "Secondary":
+          //         //       stats.secondaryCount = attribute.level_count;
+          //         //       stats.secondaryAvg = attribute.enroll_avg;
+          //         //       stats.secondaryAvgFormatted = intl.formatNumber(
+          //         //         stats.secondaryAvg,
+          //         //         {
+          //         //           maximumFractionDigits: 0
+          //         //         }
+          //         //       );
+          //         //       break;
+          //         //     case "Combined elementary and secondary":
+          //         //       stats.combinedCount = attribute.level_count;
+          //         //       stats.combinedAvg = attribute.enroll_avg;
+          //         //       stats.combinedAvgFormatted = intl.formatNumber(
+          //         //         stats.combinedAvg,
+          //         //         {
+          //         //           maximumFractionDigits: 0
+          //         //         }
+          //         //       );
+          //         //   }
+          //         // });
+
+          //         // Format the returned values and display this in the popup content
+          //         return `There is a total of <b></b> private schools that reside within the state. Out of this total amount of private schools: <ul><li><b>${stats.elemCount}</b> were classified as elementary, with an average enrollment of <b>${stats.elemAvgFormatted}</b> students.</li><li><b>${stats.secondaryCount}</b> were classified as secondary, with an average enrollment of <b>${stats.secondaryAvgFormatted}</b> students.</li><li><b>${stats.combinedCount}</b> were classified as both elementary and secondary, with an average enrollment of <b>${stats.combinedAvgFormatted} </b>students.</li></ul>`;
+          //       });
+          //   }
+          // });
+          
         });
 
-      });
+        
 
-      
+        var allLis=window.parent.document.getElementById("tab_header").getElementsByTagName("li");
+        for(var i=0; i<allLis.length; i++){
+            var li = allLis[i];
+            let k = i
+            li.index = i;
+            li.onclick = function () {
+                // console.log(k);
+                if( k == 0){
+                  changeGrid()
+                }else if(k == 1){
+                  changeMap()
+                }
+                for(var j=0; j<allLis.length; j++){
+                    allLis[j].className = '';
+                }
+                this.className = 'selected';
+            }
+        }
+
+        function changeGrid(){
+          console.log('grid',map,view)
+          map.remove(pointLayer2)
+          map.remove(pointLayer3)
+          map.remove(pointLayer4)
+          map.add(FeatureLayer20)
+         
+          FeatureLayer20.when(function(){
+            view.goTo(FeatureLayer20.fullExtent)
+            const contentPromise = new CustomContent({
+                outFields: ["*"],
+                creator: function (event) {
+                  // console.log(event.graphic.attributes,FeatureLayer20,document.getElementsByClassName('esri-popup__header-title'),$(".esri-popup__header-title").context)
+                  // console.log(view.popup.selectedFeature)
+                  window.parent.logGrid(view.popup.selectedFeature.attributes)
+                  return `There is a total of <b>`
+                }
+            })  
+
+            const template = new PopupTemplate({
+              outFields: ["*"],
+              title: "{FID}",
+              content: [ contentPromise],
+
+            });
+
+            FeatureLayer20.popupTemplate = template;
+          })
+          
+        }
+
+        function changeMap(){
+          console.log('map')
+          map.add(pointLayer2)
+          map.add(pointLayer3)
+          map.add(pointLayer4)
+          map.remove(FeatureLayer20)
+          view.goTo(housingLayer.fullExtent)
+        }
+      });
+          
     </script>
   </head>
 

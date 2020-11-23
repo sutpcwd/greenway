@@ -140,9 +140,9 @@
                     <div class="allnav" id="ceshi8"></div>
                 </div> -->
                  <div id="tab_header">
-                    <ul>
-                        <li class="selected">网格化显示</li>
-                        <li>按廊道显示</li>
+                    <ul id="tab_ul">
+                        <li id="tab_01">网格化显示</li>
+                        <li class="selected">按廊道显示</li>
                     </ul>
                 </div>
                 <div id="tab_content">
@@ -172,7 +172,7 @@
                         </div> -->
 
                     <!-- </div> -->
-                    <iframe src="./tile.html" class="tile"></iframe>
+                    <iframe id="tile" src="./tile.html" class="tile"></iframe>
 
                     <!-- <div class="dom" style="display: none">
                         <div class="listStyle">
@@ -521,30 +521,25 @@
     
 </script>
 <script>
- $(function () {
-     var allLis=document.getElementById("tab_header").getElementsByTagName("li");
-     var allDom = document.getElementById("tab_content").getElementsByClassName("dom");
+//  $(function () {
+//      var allLis=document.getElementById("tab_header").getElementsByTagName("li");
 
-      console.log(allLis, allDom);
-
-     // 2. 遍历监听
-     for(var i=0; i<allLis.length; i++){
-         var li = allLis[i];
-         li.index = i;
-
-         li.onclick = function () {
-             console.log(i);
-             for(var j=0; j<allLis.length; j++){
-                 allLis[j].className = '';
-                 allDom[j].style.display = 'none';
-             }
-
-             this.className = 'selected';
-             allDom[this.index].style.display = 'block';
-
-         }
-     }
- })
+//      // 2. 遍历监听
+//      for(var i=0; i<allLis.length; i++){
+//          var li = allLis[i];
+//          let k = i
+//          li.index = i;
+//          li.onclick = function () {
+//              console.log(k);
+//              $("#tile")[0].contentWindow.changeG();
+//              for(var j=0; j<allLis.length; j++){
+//                  allLis[j].className = '';
+//              }
+//              this.className = 'selected';
+//              this.innerText = "11"
+//          }
+//      }
+//  })
  function logInformation(data){
      console.log('logInformation',data)
      if(data == "廊道5-福永大型城市绿廊"){
@@ -564,6 +559,11 @@
         $().ceshi8(16)
      }
  }
+
+function logGrid(data){
+    console.log('logGrid',data)
+    $().ceshi_Grid(data)
+}
  
 </script>
 
