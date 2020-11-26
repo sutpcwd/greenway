@@ -1765,28 +1765,28 @@ $.fn.ceshi5=function(value){
         //ceshi1
         var ydata = [{
             name: '林地',
-            value:value.tree_s,
-            percent:value.tree_r
+            value:value.tree_s.toFixed(2),
+            percent:(value.tree_r*100).toFixed(2)
         },
             {
                 name: '草地',
-                value: value.grass_s,
-                percent:value.grass_r
+                value: value.grass_s.toFixed(2),
+                percent:(value.grass_r*100).toFixed(2)
             },
             {
                 name: '水体',
-                value: value.water_s,
-                percent:value.water_r
+                value: value.water_s.toFixed(2),
+                percent:(value.water_r*100).toFixed(2)
             },
             {
                 name: '裸地',
-                value: value.barren_s,
-                percent:value.barren_r
+                value: value.barren_s.toFixed(2),
+                percent:(value.barren_r*100).toFixed(2)
             },
             {
                 name: '其他地类',
-                value: value.other_s,
-                percent:value.other_r
+                value: value.other_s.toFixed(2),
+                percent:(value.other_r*100).toFixed(2)
             },
         ];
         var color = ['#4ac7f5','#25f3e6','#fdb301',"#8d7fec", "#ffff43", "#cf9ef1"]
@@ -1876,102 +1876,113 @@ $.fn.ceshi5=function(value){
         myChart1.setOption(option);
         //ceshi3
 
-//         var myChart3 = echarts.init($("#ceshi3")[0]);
-//         /**
-//          * 图标所需数据
-//          */
-//         var data = {
-//             0:{
-//             value: 20.2,
-//             text: ['高覆盖度','中覆盖度','低覆盖度'],
-//             color: ['#4ac7f5','#25f3e6','#ffff43'],
-//             xAxis: ['草地覆盖度'],
-//             values: ['46','20','34'],
-//             },
-//             5:{
-//             value: 20.2,
-//             text: ['高覆盖度','中覆盖度','低覆盖度'],
-//             color: ['#4ac7f5','#25f3e6','#ffff43'],
-//             xAxis: ['草地覆盖度'],
-//             values: ['21','30','49'],
-//             },
-//             10:{
-//             value: 20.2,
-//             text: ['高覆盖度','中覆盖度','低覆盖度'],
-//             color: ['#4ac7f5','#25f3e6','#ffff43'],
-//             xAxis: ['草地覆盖度'],
-//             values: ['48','15','37'],
-//             },
-//             16:{
-//             value: 20.2,
-//             text: ['高覆盖度','中覆盖度','低覆盖度'],
-//             color: ['#4ac7f5','#25f3e6','#ffff43'],
-//             xAxis: ['草地覆盖度'],
-//             values: ['36','42','22'],
-//             },
-            
-//         }
+        var myChart3 = echarts.init($("#ceshi3")[0]);
+        /**
+         * 图标所需数据
+         */
+        if(value.grass_r == 0){
+            var data3 = {
+                0:{
+                value: 20.2,
+                text: ['低覆盖度'],
+                color: ['#ffff43'],
+                xAxis: ['草地覆盖度'],
+                values: [0],
+                },
+            }
+        }else if (value.grass_r < 0.3){
+            var data3 = {
+                0:{
+                value: 20.2,
+                text: ['低覆盖度'],
+                color: ['#ffff43'],
+                xAxis: ['草地覆盖度'],
+                values: [100],
+                },
+            }
+        }else if( value.grass_r < 0.7){
+            var data3 = {
+                0:{
+                value: 20.2,
+                text: ['中覆盖度'],
+                color: ['#25f3e6'],
+                xAxis: ['草地覆盖度'],
+                values: [100],
+                },
+            }
+        }else if (value.grass_r < 1.01){
+            var data3 = {
+                0:{
+                value: 20.2,
+                text: ['高覆盖度'],
+                color: ['#4ac7f5'],
+                xAxis: ['草地覆盖度'],
+                values: [100],
+                },
+            }
+        }
+        
 
-//         var seriesData = {
-//             type: 'pie',
-//             radius: ['35', '45'],
+        var seriesData3 = {
+            type: 'pie',
+            radius: ['35', '45'],
 
-//             center: [50  + '%', '40%'],
-//             hoverAnimation: false,
-//             label: {
-//                 normal: {
-//                     position: 'center',
+            center: [50  + '%', '40%'],
+            hoverAnimation: false,
+            label: {
+                normal: {
+                    position: 'center',
                     
-//                 },
-//             },
-//             data: []
-//         };
-//         var titleData = [{
-//             text: '草地覆盖度',
-//             left: 50  - .5 + '%',
-//             top: '70%',
+                },
+            },
+            data: []
+        };
+        var titleData3 = [{
+            text: '草地覆盖度',
+            left: 50  - .5 + '%',
+            top: '70%',
             
-//             textAlign: 'center',
-//             textStyle: {
-//                 fontSize: '18',
-//                 color: '#ffffff',
-//                 fontWeight: '400',
+            textAlign: 'center',
+            textStyle: {
+                fontSize: '18',
+                color: '#ffffff',
+                fontWeight: '400',
                 
-//             },
-//         }];
-//         data[value].values.forEach(function(item, index) {
-//             // console.log(item)
-//             seriesData.data.push({
-//                     value: item,
-//                     name: data[value].text[index],
-//                     itemStyle: {
-//                         normal: {
-//                             color: data[value].color[index],
-//                         }
-//                     },
-//                     label: {
-//                         normal: {
-//                             show: true,
-//                             position:'outside',
-//                             formatter: '{b}\n({d}%)',
+            },
+        }];
+        data3[0].values.forEach(function(item, index) {
+            // console.log(item)
+            seriesData3.data.push({
+                    value: item,
+                    name: data3[0].text[index],
+                    itemStyle: {
+                        normal: {
+                            color: data3[0].color[index],
+                        }
+                    },
+                    label: {
+                        normal: {
+                            show: true,
+                            position:'outside',
+                            formatter: '{b}\n({d}%)',
 
-//                         }
-//                     }
-//                 },
-//                 )
-//         })
+                        }
+                    }
+                },
+                )
+        })
 
-// ////////////////////////////////////////
+////////////////////////////////////////
 
-//         // let value = data.value || 0
-//         option = {
-//             /*backgroundColor: '#fff',*/
-//             title: titleData,
-//             series: seriesData,
-//         }
+        // let value = data.value || 0
+        option3 = {
+            /*backgroundColor: '#fff',*/
+            title: titleData3,
+            series: seriesData3,
+        }
 
-//         myChart3.setOption(option);
-//         window.addEventListener('resize', function () {myChart.resize();})
+        myChart3.setOption(option3);
+        window.addEventListener('resize', function () {myChart3.resize();})
         //ceshi5
         var myChart5 = echarts.init($("#ceshi5")[0]);
         /**
@@ -1983,7 +1994,7 @@ $.fn.ceshi5=function(value){
             text: ['高层植被','中层植被','低层植被'],
             color: ['#4ac7f5','#25f3e6','#ffff43'],
             xAxis: ['植被覆盖度'],
-            values: [value.high_t_r,value.midd_t_r,value.low_t_r],
+            values: [value.high_t_r.toFixed(2),value.midd_t_r.toFixed(2),value.low_t_r.toFixed(2)],
             },
         }
 
@@ -2063,8 +2074,8 @@ $.fn.ceshi5=function(value){
         };
         data8 = {
             0:{
-                0:['林地面积\n\n'+value.tree_s+'公顷', '植被覆盖度\n\n'+(value.tree_r+value.grass_r)*100+'%',],
-                1:['树高平均值\n\n'+value.ave_tre_h+'m','树冠面积\n\n'+value.corn_size+'公顷' ]
+                0:['林地面积\n\n'+value.tree_s.toFixed(2)+'公顷', '植被覆盖度\n\n'+((value.tree_r+value.grass_r)*100).toFixed(2)+'%',],
+                1:['树高平均值\n\n'+value.ave_tre_h.toFixed(2)+'m','树冠面积\n\n'+value.corn_size.toFixed(2)+'公顷' ]
             },
             
         }
