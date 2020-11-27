@@ -1,5 +1,12 @@
 $(function () {
-
+    var greenData;
+    $.ajax({
+        url: './js/1.json',
+        async: false,
+        success: function (data) {
+            greenData = data
+        }
+    });
     // $().ceshis1(0);
     // ceshi2();
     // ceshi3();
@@ -14,109 +21,30 @@ $(function () {
     
         $.fn.ceshis1=function(value){
         var myChart = echarts.init(document.getElementById('ceshi'));
-
         var ydata = [{
             name: '林地',
-            value: 10640,
-            percent:52.68
+            value: greenData[value][1],
+            percent:greenData[value][2]
         },
             {
                 name: '草地',
-                value: 643,
-                percent:3.18
+                value: greenData[value][3],
+                percent:greenData[value][4]
             },
             {
                 name: '水体',
-                value: 27,
-                percent:0.13
+                value: greenData[value][7],
+                percent:greenData[value][8]
             },
             {
                 name: '裸地',
-                value: 1237,
-                percent:6.12
+                value: greenData[value][5],
+                percent:greenData[value][6]
             },
             {
                 name: '其他地类',
-                value: 7652,
-                percent:37.88
-            },
-        ];
-        var ydata5 = [{
-            name: '林地',
-            value: 62.82,
-            percent:23
-        },
-            {
-                name: '草地',
-                value: 3.96,
-                percent:1
-            },
-            {
-                name: '水体',
-                value: 10.11,
-                percent:4
-            },
-            {
-                name: '裸地',
-                value: 36.59,
-                percent:14
-            },
-            {
-                name: '其他地类',
-                value: 156.12,
-                percent:58
-            },
-        ];
-        var ydata10 = [{
-            name: '林地',
-            value: 7.6735,
-            percent:73
-        },
-            {
-                name: '草地',
-                value: 0.0681,
-                percent:3.18
-            },
-            {
-                name: '水体',
-                value: 0.0241,
-                percent:1
-            },
-            {
-                name: '裸地',
-                value: 0.8587,
-                percent:8
-            },
-            {
-                name: '其他地类',
-                value: 1.9239,
-                percent:17
-            },
-        ];
-        var ydata16 = [{
-            name: '林地',
-            value: 7.4,
-            percent:10
-        },
-            {
-                name: '草地',
-                value: 6.1,
-                percent:8
-            },
-            {
-                name: '水体',
-                value: 0,
-                percent:0
-            },
-            {
-                name: '裸地',
-                value: 20.800,
-                percent:27
-            },
-            {
-                name: '其他地类',
-                value: 41.40,
-                percent:55
+                value: greenData[value][9],
+                percent:greenData[value][10]
             },
         ];
         var color = ['#4ac7f5','#25f3e6','#fdb301',"#8d7fec", "#ffff43", "#cf9ef1"]
@@ -210,7 +138,7 @@ $(function () {
         //         // tooltip:{show:false}
         //     }]
         // };
-        if(value== 0){
+        
         option = {
             yAxis: {
                 type: 'category',
@@ -287,238 +215,7 @@ $(function () {
             color:color,
         };
         myChart.setOption(option);
-        }else if(value == 5){
-            option = {
-                yAxis: {
-                    type: 'category',
-                    data: ['a', "b", "c", "d", 'e',],
-                    axisLabel: {
-                        formatter: function (value) {
-                            return '{' + value + '| }';
-                        },
-                        // margin: 20,
-                        rich: {
-                            value: {
-                                lineHeight: 30,
-                                align: 'center'
-                            },
-                            a: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.a
-                                }
-                            },
-                            b: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.b
-                                }
-                            },
-                            c: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.c
-                                }
-                            },
-                            d: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.d
-                                }
-                            },
-                            e: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.e
-                                }
-                            },
-                        }
-                    }
-                },
-                xAxis: {
-                    type: 'value'
-                },
-                series: [{
-                    data: ydata5,
-                    type: 'bar',
-                    name:'11',
-                    label:{
-                        normal: {
-                            show: true,
-                            position:'right',
-                            color: '#fff',
-                            textBorderWidth: 2,
-                            // formatter:'{c} {a}{b}',
-                            formatter:function(value){
-                                console.log(value)
-                                return value.data.name+'-'+value.data.value+'公顷'+'\n（'+value.data.percent+'%)'
-                            }
-                        }
-                    }
-                }],
-                color:color,
-            };
-            myChart.setOption(option);
-        }else if(value == 10){
-            option = {
-                yAxis: {
-                    type: 'category',
-                    data: ['a', "b", "c", "d", 'e',],
-                    axisLabel: {
-                        formatter: function (value) {
-                            return '{' + value + '| }';
-                        },
-                        // margin: 20,
-                        rich: {
-                            value: {
-                                lineHeight: 30,
-                                align: 'center'
-                            },
-                            a: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.a
-                                }
-                            },
-                            b: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.b
-                                }
-                            },
-                            c: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.c
-                                }
-                            },
-                            d: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.d
-                                }
-                            },
-                            e: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.e
-                                }
-                            },
-                        }
-                    }
-                },
-                xAxis: {
-                    type: 'value'
-                },
-                series: [{
-                    data: ydata10,
-                    type: 'bar',
-                    name:'11',
-                    label:{
-                        normal: {
-                            show: true,
-                            position:'right',
-                            color: '#fff',
-                            textBorderWidth: 2,
-                            // formatter:'{c} {a}{b}',
-                            formatter:function(value){
-                                console.log(value)
-                                return value.data.name+'-'+value.data.value+'公顷'+'\n（'+value.data.percent+'%)'
-                            }
-                        }
-                    }
-                }],
-                color:color,
-            };
-            myChart.setOption(option);
-        }else if( value == 16){
-            option = {
-                yAxis: {
-                    type: 'category',
-                    data: ['a', "b", "c", "d", 'e',],
-                    axisLabel: {
-                        formatter: function (value) {
-                            return '{' + value + '| }';
-                        },
-                        // margin: 20,
-                        rich: {
-                            value: {
-                                lineHeight: 30,
-                                align: 'center'
-                            },
-                            a: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.a
-                                }
-                            },
-                            b: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.b
-                                }
-                            },
-                            c: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.c
-                                }
-                            },
-                            d: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.d
-                                }
-                            },
-                            e: {
-                                height: 25,
-                                align: 'center',
-                                backgroundColor: {
-                                    image: weatherIcons.e
-                                }
-                            },
-                        }
-                    }
-                },
-                xAxis: {
-                    type: 'value'
-                },
-                series: [{
-                    data: ydata16,
-                    type: 'bar',
-                    name:'11',
-                    label:{
-                        normal: {
-                            show: true,
-                            position:'right',
-                            color: '#fff',
-                            textBorderWidth: 2,
-                            // formatter:'{c} {a}{b}',
-                            formatter:function(value){
-                                console.log(value)
-                                return value.data.name+'-'+value.data.value+'公顷'+'\n（'+value.data.percent+'%)'
-                            }
-                        }
-                    }
-                }],
-                color:color,
-            };
-            myChart.setOption(option);
-        }
+        
         // setTimeout(function() {
         //     myChart.on('mouseover', function(params) {
         //         if (params.name == ydata[0].name) {
@@ -1103,30 +800,8 @@ $(function () {
             text: ['高覆盖度','中覆盖度','低覆盖度'],
             color: ['#4ac7f5','#25f3e6','#ffff43'],
             xAxis: ['草地覆盖度'],
-            values: ['46','20','34'],
-            },
-            5:{
-            value: 20.2,
-            text: ['高覆盖度','中覆盖度','低覆盖度'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
-            xAxis: ['草地覆盖度'],
-            values: ['21','30','49'],
-            },
-            10:{
-            value: 20.2,
-            text: ['高覆盖度','中覆盖度','低覆盖度'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
-            xAxis: ['草地覆盖度'],
-            values: ['48','15','37'],
-            },
-            16:{
-            value: 20.2,
-            text: ['高覆盖度','中覆盖度','低覆盖度'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
-            xAxis: ['草地覆盖度'],
-            values: ['36','42','22'],
-            },
-            
+            values: [greenData[value][11],greenData[value][12],greenData[value][13]],
+            },         
         }
 
         var seriesData = {
@@ -1146,7 +821,7 @@ $(function () {
         var titleData = [{
             text: '草地覆盖度',
             left: 50  - .5 + '%',
-            top: '70%',
+            top: '80%',
             
             textAlign: 'center',
             textStyle: {
@@ -1156,14 +831,14 @@ $(function () {
                 
             },
         }];
-        data[value].values.forEach(function(item, index) {
-            // console.log(item)
+        data[0].values.forEach(function(item, index) {
+            console.log(item)
             seriesData.data.push({
                     value: item,
-                    name: data[value].text[index],
+                    name: data[0].text[index],
                     itemStyle: {
                         normal: {
-                            color: data[value].color[index],
+                            color: data[0].color[index],
                         }
                     },
                     label: {
@@ -1293,28 +968,7 @@ $.fn.ceshi5=function(value){
             text: ['高层植被','中层植被','低层植被'],
             color: ['#4ac7f5','#25f3e6','#ffff43'],
             xAxis: ['植被覆盖度'],
-            values: ['16','34','54'],
-            },
-            5:{
-            value: 20.2,
-            text: ['高层植被','中层植被','低层植被'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
-            xAxis: ['植被覆盖度'],
-            values: ['11','30','59'],
-            },
-            10:{
-            value: 20.2,
-            text: ['高层植被','中层植被','低层植被'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
-            xAxis: ['植被覆盖度'],
-            values: ['58','25','17'],
-            },
-            16:{
-            value: 20.2,
-            text: ['高层植被','中层植被','低层植被'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
-            xAxis: ['植被覆盖度'],
-            values: ['16','52','32'],
+            values: [greenData[value][14],greenData[value][15],greenData[value][16]],
             },
         }
 
@@ -1335,7 +989,7 @@ $.fn.ceshi5=function(value){
         var titleData = [{
             text: '树高分层',
             left: 50  - .5 + '%',
-            top: '70%',
+            top: '80%',
             
             textAlign: 'center',
             textStyle: {
@@ -1345,14 +999,14 @@ $.fn.ceshi5=function(value){
                 
             },
         }];
-        data[value].values.forEach(function(item, index) {
+        data[0].values.forEach(function(item, index) {
             // console.log(item)
             seriesData.data.push({
                     value: item,
-                    name: data[value].text[index],
+                    name: data[0].text[index],
                     itemStyle: {
                         normal: {
-                            color: data[value].color[index],
+                            color: data[0].color[index],
                         }
                     },
                     label: {
@@ -1647,20 +1301,8 @@ $.fn.ceshi5=function(value){
         };
         data = {
             0:{
-                0:['林地面积\n\n1.064公顷', '植被覆盖度\n\n53%',],
-                1:['树高平均值\n\n5m','树冠面积\n\n2公顷' ]
-            },
-            5:{
-                0:['林地面积\n\n62.82公顷', '植被覆盖度\n\n24%',  ],
-                1:['树高平均值\n\n3.4m','树冠面积\n\n72.62公顷' ]
-            },
-            10:{
-                0:['林地面积\n\n7.6735公顷', '植被覆盖度\n\n74%', ],
-                1:['树高平均值\n\n5.07m','树冠面积\n\n7.9735公顷' ]
-            },
-            16:{
-                0:['林地面积\n\n7.4公顷', '植被覆盖度\n\n18%', ],
-                1:['树高平均值\n\n2.06m','树冠面积\n\n8.4728公顷' ]
+                0:['林地面积\n\n'+greenData[value][1]+'公顷', '植被覆盖度\n\n'+greenData[value][19]+'%',],
+                1:['树高平均值\n\n'+greenData[value][17]+'m','树冠面积\n\n'+greenData[value][18]+'公顷' ]
             },
         }
         option = {
@@ -1674,7 +1316,7 @@ $.fn.ceshi5=function(value){
                 }
             },
             xAxis: {
-                data: data[value][0],
+                data: data[0][0],
                 axisTick: {show: false},
                 axisLine: {show: false},
                 axisLabel: {
@@ -1720,7 +1362,7 @@ $.fn.ceshi5=function(value){
                 }
             },
             xAxis: {
-                data: data[value][1],
+                data: data[0][1],
                 axisTick: {show: false},
                 axisLine: {show: false},
                 axisLabel: {
@@ -1940,7 +1582,7 @@ $.fn.ceshi5=function(value){
         var titleData3 = [{
             text: '草地覆盖度',
             left: 50  - .5 + '%',
-            top: '70%',
+            top: '80%',
             
             textAlign: 'center',
             textStyle: {
@@ -2015,7 +1657,7 @@ $.fn.ceshi5=function(value){
         var titleData5 = [{
             text: '树高分层',
             left: 50  - .5 + '%',
-            top: '70%',
+            top: '80%',
             
             textAlign: 'center',
             textStyle: {

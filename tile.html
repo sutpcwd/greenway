@@ -105,30 +105,98 @@
           opacity: 0.5,
         });
 
-        var pointLayer = new PointCloudLayer({
+        
+
+        var pointLayer1 = new PointCloudLayer({
           portalItem: {
-            id: "c187e70e63144bae8b0f4cb49029b8a2"
+            id: "d1942af108db4cd399751647026486fe"
           }
         });
 
-        var pointLayer2 = new PointCloudLayer({
-          portalItem: {
-            id: "331e0176ad7340a28592dd008782dd65"
-          }
-        });
-
-        var pointLayer3 = new PointCloudLayer({
+        var pointLayer5 = new PointCloudLayer({
           portalItem: {
             id: "bff4f1a1f2954011b4a500711fc5fe71"
           }
         });
 
-        var pointLayer4 = new PointCloudLayer({
+        var pointLayer7 = new PointCloudLayer({
+          portalItem: {
+            id: "a3c6c83f092249698db3c2b05032f2b3"
+          }
+        });
+
+        var pointLayer8 = new PointCloudLayer({
+          portalItem: {
+            id: "1d78b5dac46b4d2b9545d7e5fafb474f"
+          }
+        });
+
+        var pointLayer9 = new PointCloudLayer({
+          portalItem: {
+            id: "c518ce9b84c24738b3598d5f8def52fe"
+          }
+        });
+
+        var pointLayer10 = new PointCloudLayer({
+          portalItem: {
+            id: "331e0176ad7340a28592dd008782dd65"
+          }
+        });
+
+        var pointLayer11 = new PointCloudLayer({
+          portalItem: {
+            id: "cb107039a8ed4e51bbda138066c09bd5"
+          }
+        });
+
+        var pointLayer13 = new PointCloudLayer({
+          portalItem: {
+            id: "324f65dbf9464c0aac1afe2e6fb13378"
+          }
+        });
+
+        var pointLayer14 = new PointCloudLayer({
+          portalItem: {
+            id: "b9efa711ff1e41f68f2b40e97f9d189f"
+          }
+        });
+
+        var pointLayer15 = new PointCloudLayer({
+          portalItem: {
+            id: "0856465106cd42a884d8498b717d2631"
+          }
+        });
+
+        var pointLayer16 = new PointCloudLayer({
           portalItem: {
             id: "569226a4f9784cb78a66620200c4270e"
           }
         });
 
+        var pointLayer17 = new PointCloudLayer({
+          portalItem: {
+            id: "150aa91d8d2e45a789226dd733497bf6"
+          }
+        });
+
+        var pointLayer20 = new PointCloudLayer({
+          portalItem: {
+            id: "064493cb65fe4512874fb986fa8aa736"
+          }
+        });
+
+        var pointLayer21 = new PointCloudLayer({
+          portalItem: {
+            id: "ec558a3023854e2fa642f6f982c90ebf"
+          }
+        });
+        var pointLayer23 = new PointCloudLayer({
+          portalItem: {
+            id: "b05c31198c9946abaa71e86a3c27c5e7"
+          }
+        });
+
+        var pointLayers = {1:pointLayer1,5:pointLayer5,7:pointLayer7,8:pointLayer8,9:pointLayer9,10:pointLayer10,11:pointLayer11,13:pointLayer13,14:pointLayer14,15:pointLayer15,16:pointLayer16,17:pointLayer17,20:pointLayer20,21:pointLayer21,23:pointLayer23}
         var FeatureLayer20 = new FeatureLayer({
             // autocasts as new PortalItem()
             portalItem: {
@@ -149,7 +217,7 @@
        
         var map = new Map({
           basemap: "oceans",
-          layers: [transportationLayer,housingLayer,districtLayer,greenLayer,greenLayer2,pointLayer2,pointLayer3,pointLayer4],
+          layers: [transportationLayer,housingLayer,districtLayer,greenLayer,greenLayer2,pointLayer1,pointLayer5,pointLayer7,pointLayer8,pointLayer9,pointLayer10,pointLayer11,pointLayer13,pointLayer14,pointLayer15,pointLayer16,pointLayer17,pointLayer20,pointLayer21,pointLayer23],
           logo:false,//删除logo
           slider:false//删除滚动条滑块
         });
@@ -323,74 +391,55 @@
         //        }
         var selectedLayer = document.getElementById("selectedLayer");
         selectedLayer.addEventListener("change", function () {
-            console.log(this.options[this.options.selectedIndex].text)
-            if(this.options[this.options.selectedIndex].text == '廊道5-福永大型城市绿廊'){
-                var cam = new Camera({
-                position: new Point({
-                    x: 12667907.721876847,
-                    y: 2593079.1516751195,
-                    z: 9016.327039455064,
-                    spatialReference: {wkid: 102100}
-                  }),
-                  heading: 354.1136916584065, // facing due south
-                  tilt: 0.49929858290927887      // bird's eye view
-                });
-                view.goTo(cam);
-                window.parent.logInformation('廊道5-福永大型城市绿廊');
-            }else if(this.options[this.options.selectedIndex].text == '廊道10-笔架山大型城市绿廊'){
-              var cam = new Camera({
-                position: new Point({
-                  x: 12698564.191291625,
-                  y: 2577431.1338604074,
-                  z: 10029.730827421881,
-                  spatialReference: {wkid: 102100}
-                }),
-                heading: 354.11434063194974, // facing due south
-                tilt: 0.4992190910948526      // bird's eye view
-              });
-              view.goTo(cam);
-              window.parent.logInformation('廊道10-笔架山大型城市绿廊');
-            }else if(this.options[this.options.selectedIndex].text == '廊道16-平湖横岗生态廊道'){
-                var cam = new Camera({
-                  position: new Point({
-                    x: 12705090.61349802,
-                    y: 2589721.637229366,
-                    z: 5989.642835292034,
-                    spatialReference: {wkid: 102100}
-                  }),
-                  heading: 354.11307359105, // facing due south
-                  tilt: 0.49953537587559954      // bird's eye view
-                });
-                view.goTo(cam);
-                window.parent.logInformation('廊道16-平湖横岗生态廊道');
-            }
+            let dataId = this.options[this.options.selectedIndex].getAttribute('data-id');
+            view.goTo(pointLayers[dataId].fullExtent)
+            // $.ajax({
+            //     url: './js/1.json',
+            //     async: false,
+            //     success: function (data) {
+            //         console.log(data[dataId])
+            //     }
+            // });
+            window.parent.logInformation(dataId);
         })
 
         view.when(function () {
-          var params2 = {
-            layer: pointLayer2,
-            field: "ELEVATION"
-          };
-          colorRendererCreator.createPCContinuousRenderer(params2)
-            .then(function(response){
-              pointLayer2.renderer = response.renderer;
-            });
-            var params3 = {
-            layer: pointLayer3,
-            field: "ELEVATION"
-          };
-          colorRendererCreator.createPCContinuousRenderer(params3)
-            .then(function(response){
-              pointLayer3.renderer = response.renderer;
-            });
-          var params4 = {
-            layer: pointLayer4,
-            field: "ELEVATION"
-          };
-          colorRendererCreator.createPCContinuousRenderer(params4)
-            .then(function(response){
-              pointLayer4.renderer = response.renderer;
-            });
+          // for (let i in pointLayers){
+          //   console.log(pointLayers[i])
+          //   var params2 = {
+          //     layer: pointLayer2,
+          //     field: "ELEVATION"
+          //   };
+          //   colorRendererCreator.createPCContinuousRenderer(params2)
+          //     .then(function(response){
+          //       pointLayer2.renderer = response.renderer;
+          //     });
+          // }
+
+          // var params2 = {
+          //   layer: pointLayer2,
+          //   field: "ELEVATION"
+          // };
+          // colorRendererCreator.createPCContinuousRenderer(params2)
+          //   .then(function(response){
+          //     pointLayer2.renderer = response.renderer;
+          //   });
+          //   var params3 = {
+          //   layer: pointLayer3,
+          //   field: "ELEVATION"
+          // };
+          // colorRendererCreator.createPCContinuousRenderer(params3)
+          //   .then(function(response){
+          //     pointLayer3.renderer = response.renderer;
+          //   });
+          // var params4 = {
+          //   layer: pointLayer4,
+          //   field: "ELEVATION"
+          // };
+          // colorRendererCreator.createPCContinuousRenderer(params4)
+          //   .then(function(response){
+          //     pointLayer4.renderer = response.renderer;
+          //   });
 
           var radios = document.getElementsByName("renderer");
           // Handle change events on radio buttons to switch to the correct renderer
@@ -399,133 +448,53 @@
               var fieldName = event.target.value;
               console.log(fieldName)
               if(fieldName == "CLASS_CODE"){
-                var params2 = {
-                  layer: pointLayer2,
-                  field: "CLASS_CODE"
-                };
-                typeRendererCreator.createPCClassRenderer(params2)
-                  .then(function(response){
-                    pointLayer2.renderer = response.renderer;
-                    pointLayer2.renderer.colorUniqueValueInfos = [
-                      {
-                        values: ["0"],
-                        label: "Unassigned",
-                        color: [178, 178, 178]
-                      },
-                      {
-                        values: ["1"],
-                        label: "High vegetation",
-                        color: [34,170,0]
-                      },
-                      {
-                        values: ["2"],
-                        label: "Low vegetation",
-                        color: [160,255,136]
-                      },
-                      {
-                        values: ["3"],
-                        label: "Ground",
-                        color: [238,48,0]
-                      },
-                      {
-                        values: ["4"],
-                        label: "Water",
-                        color: [0,48,238]
-                      }]
-                  });
-                  var params3 = {
-                  layer: pointLayer3,
-                  field: "CLASS_CODE"
-                };
-                typeRendererCreator.createPCClassRenderer(params3)
-                  .then(function(response){
-                    pointLayer3.renderer = response.renderer;
-                    pointLayer3.renderer.colorUniqueValueInfos = [
-                      {
-                        values: ["0"],
-                        label: "Unassigned",
-                        color: [178, 178, 178]
-                      },
-                      {
-                        values: ["1"],
-                        label: "High vegetation",
-                        color: [34,170,0]
-                      },
-                      {
-                        values: ["2"],
-                        label: "Low vegetation",
-                        color: [160,255,136]
-                      },
-                      {
-                        values: ["3"],
-                        label: "Ground",
-                        color: [238,48,0]
-                      },
-                      {
-                        values: ["4"],
-                        label: "Water",
-                        color: [0,48,238]
-                      }]
-                  });
-                var params4 = {
-                  layer: pointLayer4,
-                  field: "CLASS_CODE"
-                };
-                typeRendererCreator.createPCClassRenderer(params4)
-                  .then(function(response){
-                    pointLayer4.renderer = response.renderer;
-                    pointLayer4.renderer.colorUniqueValueInfos = [
-                      {
-                        values: ["0"],
-                        label: "Unassigned",
-                        color: [178, 178, 178]
-                      },
-                      {
-                        values: ["1"],
-                        label: "High vegetation",
-                        color: [34,170,0]
-                      },
-                      {
-                        values: ["2"],
-                        label: "Low vegetation",
-                        color: [160,255,136]
-                      },
-                      {
-                        values: ["3"],
-                        label: "Ground",
-                        color: [238,48,0]
-                      },
-                      {
-                        values: ["4"],
-                        label: "Water",
-                        color: [0,48,238]
-                      }]
-                  });
+                for (let i in pointLayers){
+                  var params = {
+                    layer: pointLayers[i],
+                    field: "CLASS_CODE"
+                  };
+                  typeRendererCreator.createPCClassRenderer(params)
+                    .then(function(response){
+                      pointLayers[i].renderer = response.renderer;
+                      pointLayers[i].renderer.colorUniqueValueInfos = [
+                        {
+                          values: ["0"],
+                          label: "Unassigned",
+                          color: [178, 178, 178]
+                        },
+                        {
+                          values: ["1"],
+                          label: "High vegetation",
+                          color: [34,170,0]
+                        },
+                        {
+                          values: ["2"],
+                          label: "Low vegetation",
+                          color: [160,255,136]
+                        },
+                        {
+                          values: ["3"],
+                          label: "Ground",
+                          color: [238,48,0]
+                        },
+                        {
+                          values: ["4"],
+                          label: "Water",
+                          color: [0,48,238]
+                        }]
+                    });
+                }
               }else if(fieldName == "ELEVATION"){
-                  var params2 = {
-                    layer: pointLayer2,
+                for(let i in pointLayers){
+                  var params = {
+                    layer: pointLayers[i],
                     field: "ELEVATION"
                   };
-                  colorRendererCreator.createPCContinuousRenderer(params2)
+                  colorRendererCreator.createPCContinuousRenderer(params)
                     .then(function(response){
-                      pointLayer2.renderer = response.renderer;
+                      pointLayers[i].renderer = response.renderer;
                     });
-                    var params3 = {
-                    layer: pointLayer3,
-                    field: "ELEVATION"
-                  };
-                  colorRendererCreator.createPCContinuousRenderer(params3)
-                    .then(function(response){
-                      pointLayer3.renderer = response.renderer;
-                    });
-                  var params4 = {
-                    layer: pointLayer4,
-                    field: "ELEVATION"
-                  };
-                  colorRendererCreator.createPCContinuousRenderer(params4)
-                    .then(function(response){
-                      pointLayer4.renderer = response.renderer;
-                    });
+                }
               }
             });
           }
@@ -659,9 +628,9 @@
 
         function changeGrid(){
           console.log('grid',map,view)
-          map.remove(pointLayer2)
-          map.remove(pointLayer3)
-          map.remove(pointLayer4)
+          for(let i in pointLayers){
+            map.remove(pointLayers[i])
+          }
           map.add(FeatureLayer20)
          
           FeatureLayer20.when(function(){
@@ -690,9 +659,9 @@
 
         function changeMap(){
           console.log('map')
-          map.add(pointLayer2)
-          map.add(pointLayer3)
-          map.add(pointLayer4)
+          for(let i in pointLayers){
+            map.add(pointLayers[i])
+          }
           map.remove(FeatureLayer20)
           view.goTo(housingLayer.fullExtent)
         }
@@ -706,9 +675,26 @@
     <id id="layerToggle" class="esri-widget">
       <select id="selectedLayer" >
         <option >廊道列表</option>
-        <option >廊道5-福永大型城市绿廊</option>
-        <option >廊道10-笔架山大型城市绿廊</option>
-        <option >廊道16-平湖横岗生态廊道</option>
+        <option data-id=1>廊道1-罗田-光明大型城市绿廊</option>
+        <!-- <option data-id=2>廊道2-罗田-松岗生态廊道</option>
+        <option data-id=3>廊道3-公明-松岗大型城市绿廊</option>
+        <option data-id=4>廊道4-松岗-沙井生态廊道</option> -->
+        <option data-id=5>廊道5-福永大型城市绿廊</option>
+        <!-- <option data-id=6>廊道6-西乡大型城市绿廊</option> -->
+        <option data-id=7>廊道7-新安-南山大型城市绿廊</option>
+        <option data-id=8>廊道8-沙河大型城市绿廊</option>
+        <option data-id=9>廊道9-竹子林大型城市绿廊</option>
+        <!-- <option data-id=10>廊道10-笔架山大型城市绿廊</option> -->
+        <option data-id=11>廊道11-观澜-羊台山生态廊道</option>
+        <option data-id=13>廊道13-坂田-布吉大型城市绿廊</option>
+        <!-- <option data-id=14>廊道14-平湖-观澜-清林径大型城市绿廊</option> -->
+        <option data-id=15>廊道15-布吉-坂田大型城市绿廊</option>
+        <option data-id=16>廊道16-平湖-横岗生态廊道</option>
+        <option data-id=17>廊道17-银湖山-布心生态廊道</option>
+        <!-- <option data-id=19>廊道19-松岗-龙岗大型城市绿廊</option> -->
+        <option data-id=20>廊道20-笔架山-马峦山生态廊道</option>
+        <option data-id=21>廊道21-坪山-龙岗大型城市绿廊</option>
+        <option data-id=23>廊道23-坪山-坑梓大型城市绿廊</option>
       </select>
     </id>
     <div id="paneDiv" class="esri-widget">

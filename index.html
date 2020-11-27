@@ -542,22 +542,10 @@
 //  })
  function logInformation(data){
      console.log('logInformation',data)
-     if(data == "廊道5-福永大型城市绿廊"){
-        $().ceshis1(5)
-        $().ceshi3(5)
-        $().ceshi5(5)
-        $().ceshi8(5)
-     }else if(data == "廊道10-笔架山大型城市绿廊"){
-        $().ceshis1(10)
-        $().ceshi3(10)
-        $().ceshi5(10)
-        $().ceshi8(10)
-     }else if(data == "廊道16-平湖横岗生态廊道"){
-        $().ceshis1(16)
-        $().ceshi3(16)
-        $().ceshi5(16)
-        $().ceshi8(16)
-     }
+     $().ceshis1(data)
+     $().ceshi3(data)
+     $().ceshi5(data)
+     $().ceshi8(data)
  }
 
 function logGrid(data){
