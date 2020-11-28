@@ -113,9 +113,33 @@
           }
         });
 
+        var pointLayer2 = new PointCloudLayer({
+          portalItem: {
+            id: "56f78b6909734595951b4ef3e194914f"
+          }
+        });
+
+        var pointLayer3 = new PointCloudLayer({
+          portalItem: {
+            id: "a3370fdfa77344e4a87a0d46f66e013c"
+          }
+        });
+
+        var pointLayer4 = new PointCloudLayer({
+          portalItem: {
+            id: "24c60942fa874118b6c9509b3fd74432"
+          }
+        });
+
         var pointLayer5 = new PointCloudLayer({
           portalItem: {
             id: "bff4f1a1f2954011b4a500711fc5fe71"
+          }
+        });
+
+        var pointLayer6 = new PointCloudLayer({
+          portalItem: {
+            id: "3192347d38164ed897fb182388f00b18"
           }
         });
 
@@ -139,13 +163,13 @@
 
         var pointLayer10 = new PointCloudLayer({
           portalItem: {
-            id: "331e0176ad7340a28592dd008782dd65"
+            id: "b5186133126547a9ab2b0db2c3a1c570"
           }
         });
 
         var pointLayer11 = new PointCloudLayer({
           portalItem: {
-            id: "cb107039a8ed4e51bbda138066c09bd5"
+            id: "e6060893eb574caa924ff3a5a4279998"
           }
         });
 
@@ -157,7 +181,7 @@
 
         var pointLayer14 = new PointCloudLayer({
           portalItem: {
-            id: "b9efa711ff1e41f68f2b40e97f9d189f"
+            id: "7b303b2f4b5e4b8f93082083dd282191"
           }
         });
 
@@ -175,7 +199,13 @@
 
         var pointLayer17 = new PointCloudLayer({
           portalItem: {
-            id: "150aa91d8d2e45a789226dd733497bf6"
+            id: "2e191cb00d8349ca973b7bb16cc8a571"
+          }
+        });
+
+        var pointLayer19 = new PointCloudLayer({
+          portalItem: {
+            id: "8f608cf5b3724a449d13d164fe3955db"
           }
         });
 
@@ -187,7 +217,7 @@
 
         var pointLayer21 = new PointCloudLayer({
           portalItem: {
-            id: "ec558a3023854e2fa642f6f982c90ebf"
+            id: "b1668b7c45454d24957eeeb9bea744e2"
           }
         });
         var pointLayer23 = new PointCloudLayer({
@@ -195,8 +225,8 @@
             id: "b05c31198c9946abaa71e86a3c27c5e7"
           }
         });
+        var pointLayers = {1:pointLayer1,2:pointLayer2,3:pointLayer3,4:pointLayer4,5:pointLayer5,6:pointLayer6,7:pointLayer7,8:pointLayer8,9:pointLayer9,10:pointLayer10,11:pointLayer11,13:pointLayer13,14:pointLayer14,15:pointLayer15,16:pointLayer16,17:pointLayer17,19:pointLayer19,20:pointLayer20,21:pointLayer21,23:pointLayer23}
 
-        var pointLayers = {1:pointLayer1,5:pointLayer5,7:pointLayer7,8:pointLayer8,9:pointLayer9,10:pointLayer10,11:pointLayer11,13:pointLayer13,14:pointLayer14,15:pointLayer15,16:pointLayer16,17:pointLayer17,20:pointLayer20,21:pointLayer21,23:pointLayer23}
         var FeatureLayer20 = new FeatureLayer({
             // autocasts as new PortalItem()
             portalItem: {
@@ -205,6 +235,8 @@
             outFields: ["*"],
             opacity: 0.6,
           });
+          var gridLayers = {20:FeatureLayer20}
+
         // var params = {
         //   layer: pointLayer,
         //   field: "CLASS_CODE"
@@ -217,7 +249,7 @@
        
         var map = new Map({
           basemap: "oceans",
-          layers: [transportationLayer,housingLayer,districtLayer,greenLayer,greenLayer2,pointLayer1,pointLayer5,pointLayer7,pointLayer8,pointLayer9,pointLayer10,pointLayer11,pointLayer13,pointLayer14,pointLayer15,pointLayer16,pointLayer17,pointLayer20,pointLayer21,pointLayer23],
+          layers: [transportationLayer,housingLayer,districtLayer,greenLayer,greenLayer2,pointLayer1,pointLayer2,pointLayer3,pointLayer4,pointLayer5,pointLayer6,pointLayer7,pointLayer8,pointLayer9,pointLayer10,pointLayer11,pointLayer13,pointLayer14,pointLayer15,pointLayer16,pointLayer17,pointLayer19,pointLayer20,pointLayer21,pointLayer23],
           logo:false,//删除logo
           slider:false//删除滚动条滑块
         });
@@ -628,6 +660,8 @@
 
         function changeGrid(){
           console.log('grid',map,view)
+          var radios = document.getElementsByClassName("esri-ui-bottom-right")[0];
+          radios.style.display="none";
           for(let i in pointLayers){
             map.remove(pointLayers[i])
           }
@@ -659,6 +693,8 @@
 
         function changeMap(){
           console.log('map')
+          var radios = document.getElementsByClassName("esri-ui-bottom-right")[0];
+          radios.style.display="inline";
           for(let i in pointLayers){
             map.add(pointLayers[i])
           }
@@ -676,22 +712,22 @@
       <select id="selectedLayer" >
         <option >廊道列表</option>
         <option data-id=1>廊道1-罗田-光明大型城市绿廊</option>
-        <!-- <option data-id=2>廊道2-罗田-松岗生态廊道</option>
+        <option data-id=2>廊道2-罗田-松岗生态廊道</option>
         <option data-id=3>廊道3-公明-松岗大型城市绿廊</option>
-        <option data-id=4>廊道4-松岗-沙井生态廊道</option> -->
+        <option data-id=4>廊道4-松岗-沙井生态廊道</option>
         <option data-id=5>廊道5-福永大型城市绿廊</option>
-        <!-- <option data-id=6>廊道6-西乡大型城市绿廊</option> -->
+        <option data-id=6>廊道6-西乡大型城市绿廊</option>
         <option data-id=7>廊道7-新安-南山大型城市绿廊</option>
         <option data-id=8>廊道8-沙河大型城市绿廊</option>
         <option data-id=9>廊道9-竹子林大型城市绿廊</option>
-        <!-- <option data-id=10>廊道10-笔架山大型城市绿廊</option> -->
+        <option data-id=10>廊道10-笔架山大型城市绿廊</option>
         <option data-id=11>廊道11-观澜-羊台山生态廊道</option>
         <option data-id=13>廊道13-坂田-布吉大型城市绿廊</option>
-        <!-- <option data-id=14>廊道14-平湖-观澜-清林径大型城市绿廊</option> -->
+        <option data-id=14>廊道14-平湖-观澜-清林径大型城市绿廊</option>
         <option data-id=15>廊道15-布吉-坂田大型城市绿廊</option>
         <option data-id=16>廊道16-平湖-横岗生态廊道</option>
         <option data-id=17>廊道17-银湖山-布心生态廊道</option>
-        <!-- <option data-id=19>廊道19-松岗-龙岗大型城市绿廊</option> -->
+        <option data-id=19>廊道19-松岗-龙岗大型城市绿廊</option>
         <option data-id=20>廊道20-笔架山-马峦山生态廊道</option>
         <option data-id=21>廊道21-坪山-龙岗大型城市绿廊</option>
         <option data-id=23>廊道23-坪山-坑梓大型城市绿廊</option>

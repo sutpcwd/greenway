@@ -832,7 +832,6 @@ $(function () {
             },
         }];
         data[0].values.forEach(function(item, index) {
-            console.log(item)
             seriesData.data.push({
                     value: item,
                     name: data[0].text[index],
