@@ -207,7 +207,15 @@ $(function () {
                         // formatter:'{c} {a}{b}',
                         formatter:function(value){
                             // console.log(value)
-                            return value.data.name+'-'+value.data.value+'公顷'+'\n（'+value.data.percent+'%)'
+                            return '{color1|'+value.data.name+'}\n'+value.data.value+'公顷'+'\n('+value.data.percent+'%)'
+                        },
+                        textStyle:{
+                            fontSize:11
+                        },
+                        rich:{
+                            color1: {
+                                color: '#25f3e6'
+                            },
                         }
                     }
                 }
@@ -798,7 +806,7 @@ $(function () {
             0:{
             value: 20.2,
             text: ['高覆盖度','中覆盖度','低覆盖度'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
+            color: ['#4ac7f5','#25f3e6','#029698'],
             xAxis: ['草地覆盖度'],
             values: [greenData[value][11],greenData[value][12],greenData[value][13]],
             },         
@@ -965,7 +973,7 @@ $.fn.ceshi5=function(value){
             0:{
             value: 20.2,
             text: ['高层植被','中层植被','低层植被'],
-            color: ['#4ac7f5','#25f3e6','#ffff43'],
+            color: ['#4ac7f5','#25f3e6','#029698'],
             xAxis: ['植被覆盖度'],
             values: [greenData[value][14],greenData[value][15],greenData[value][16]],
             },
@@ -1401,11 +1409,17 @@ $.fn.ceshi5=function(value){
     $.fn.ceshi_scroll=function(value){
         // console.log(value,greenData)
         if( value == 0){
+            $('.myscroll').find('ul').empty()
+
             for(let i in greenData){
                 if( i !== 'name' & i !== '0'){
                     $('.myscroll').find('ul').append('<li><div class="fontInner clearfix"><span><b>廊道'+i+'</b></span><span>'+greenData[i][20].substring(0,7)+'</span><span>'+greenData[i][1]+'公顷</span><span>'+greenData[i][17]+'米</span><span>'+greenData[i][18]+'公顷</span></div></li>')   
                 }
             }
+            $('.myscroll').myScroll({
+                speed: 80, //数值越大，速度越慢
+                rowHeight: 24 //li的高度
+            });
         }else{
             $('.myscroll').find('ul').empty()
             $('.myscroll').find('ul').append('<li><div class="fontInner clearfix"><span><b>廊道'+value+'</b></span><span>'+greenData[value][20].substring(0,7)+'</span><span>'+greenData[value][1]+'公顷</span><span>'+greenData[value][17]+'米</span><span>'+greenData[value][18]+'公顷</span></div></li>')   
