@@ -974,8 +974,7 @@ $.fn.ceshi5=function(value){
         var seriesData = {
             type: 'pie',
             radius: ['25', '35'],
-
-            center: [50  + '%', '40%'],
+            center: [50  + '%', '50%'],
             hoverAnimation: false,
             label: {
                 normal: {
