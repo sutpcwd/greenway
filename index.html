@@ -6,15 +6,10 @@
     <title>大数据展示</title>
     <link rel="stylesheet" href="css/index.css">
     <script src="js/jquery.js"></script>
-    <script>
-        $(function () {
-            $('.myscroll').myScroll({
-                speed: 60, //数值越大，速度越慢
-                rowHeight: 38 //li的高度
-            });
-        })
-
-        $(document).ready(function () {
+</head>
+<body>
+<script>
+    $(document).ready(function () {
             var whei = $(window).width()
             $("html").css({ fontSize: whei / 22 });
             $(window).resize(function () {
@@ -22,10 +17,7 @@
                 $("html").css({ fontSize: whei / 22 })
             });
         });
-    </script>
-</head>
-<body>
-
+</script>
 <div class="main">
 
     <!--头部-->
@@ -77,7 +69,7 @@
                     </div>
                     <div id="FontScroll" class="myscroll">
                         <ul>
-                            <li>
+                            <!-- <li>
                                 <div class="fontInner clearfix">
                                     <span>
                                         <b>廊道5</b>
@@ -110,6 +102,28 @@
                                     <span>8.47公顷</span>
                                 </div>
                             </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>廊道16</b>
+                                    </span>
+                                    <span>平湖横岗廊道</span>
+                                    <span>7.40公顷</span>
+                                    <span>2.06米</span>
+                                    <span>8.47公顷</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="fontInner clearfix">
+                                    <span>
+                                        <b>廊道16</b>
+                                    </span>
+                                    <span>平湖横岗廊道</span>
+                                    <span>7.40公顷</span>
+                                    <span>2.06米</span>
+                                    <span>8.47公顷</span>
+                                </div>
+                            </li> -->
                         </ul>
                     </div>     
                 </div> 
@@ -227,17 +241,26 @@
 //          }
 //      }
 //  })
+        $(function () {
+            $('.myscroll').myScroll({
+                speed: 80, //数值越大，速度越慢
+                rowHeight: 24 //li的高度
+            });
+        })
+
+        
+    
  function logInformation(data){
-     console.log('logInformation',data)
      $().ceshis1(data)
      $().ceshi3(data)
      $().ceshi5(data)
      $().ceshi8(data)
  }
 
-function logGrid(data){
-    console.log('logGrid',data)
+function logGrid(data,index){
+    console.log('logGrid',data,index)
     $().ceshi_Grid(data)
+    $().ceshi_scroll(index)
 }
  
 </script>

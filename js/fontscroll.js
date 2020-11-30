@@ -91,8 +91,8 @@
         this.each(function(i){
             var sh = opts["rowHeight"],speed = opts["speed"],_this = $(this);
             intId[i] = setInterval(function(){
+                // console.log(_this.find("ul").height(),_this.height())    
                 if(_this.find("ul").height()<=_this.height()){
-
                     clearInterval(intId[i]);
                 }else{
                     marquee(_this, sh);

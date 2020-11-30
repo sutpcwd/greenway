@@ -806,7 +806,7 @@ $(function () {
 
         var seriesData = {
             type: 'pie',
-            radius: ['35', '45'],
+            radius: ['25', '35'],
 
             center: [50  + '%', '40%'],
             hoverAnimation: false,
@@ -973,7 +973,7 @@ $.fn.ceshi5=function(value){
 
         var seriesData = {
             type: 'pie',
-            radius: ['35', '45'],
+            radius: ['25', '35'],
 
             center: [50  + '%', '40%'],
             hoverAnimation: false,
@@ -1399,8 +1399,22 @@ $.fn.ceshi5=function(value){
         myChart2.setOption(option2)
     }
 
+    $.fn.ceshi_scroll=function(value){
+        // console.log(value,greenData)
+        if( value == 0){
+            for(let i in greenData){
+                if( i !== 'name' & i !== '0'){
+                    $('.myscroll').find('ul').append('<li><div class="fontInner clearfix"><span><b>廊道'+i+'</b></span><span>'+greenData[i][20].substring(0,7)+'</span><span>'+greenData[i][1]+'公顷</span><span>'+greenData[i][17]+'米</span><span>'+greenData[i][18]+'公顷</span></div></li>')   
+                }
+            }
+        }else{
+            $('.myscroll').find('ul').empty()
+            $('.myscroll').find('ul').append('<li><div class="fontInner clearfix"><span><b>廊道'+value+'</b></span><span>'+greenData[value][20].substring(0,7)+'</span><span>'+greenData[value][1]+'公顷</span><span>'+greenData[value][17]+'米</span><span>'+greenData[value][18]+'公顷</span></div></li>')   
+            $('.myscroll').find('ul').css("margin-top", 0);
+        } 
+    }
+
     $.fn.ceshi_Grid=function(value){
-        console.log('ceshi_Grid',value)
         var myChart1 = echarts.init(document.getElementById('ceshi'));
 
         //ceshi1
@@ -1820,7 +1834,7 @@ $.fn.ceshi5=function(value){
     $().ceshi3(0)
     $().ceshi5(0)
     $().ceshi8(0)
-
+    $().ceshi_scroll(0)
 
 })
 
