@@ -221,6 +221,9 @@ $(function () {
                 }
             }],
             color:color,
+            grid:{
+                x2:70,
+            }
         };
         myChart.setOption(option);
         
