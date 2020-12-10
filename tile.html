@@ -44,6 +44,10 @@
       .esri-ui .esri-popup{
         display: none;
       }
+      .esri-legend{
+          background-color: transparent;
+          color: white;
+      }
     </style>
 
     <script>
@@ -621,12 +625,15 @@
           }
         });
         //标注
-        // view.ui.add(
-        //   new Legend({
-        //     view: view
-        //   }),
-        //   "bottom-right"
-        // );
+        var legend = new Legend({
+          view: view,
+          layerInfos: [{
+            layer: pointLayer1,
+            title: "Legend"
+          }],
+          type : 'card',
+        });
+
         view.ui.add("paneDiv", "bottom-right");
         view.ui.add("layerToggle","top-right")
         /*****************************************************************
@@ -838,6 +845,7 @@
               var fieldName = event.target.value;
               console.log(fieldName)
               if(fieldName == "CLASS_CODE"){
+                var k = 0;
                 for (let i in pointLayers){
                   var params = {
                     layer: pointLayers[i],
@@ -865,7 +873,7 @@
                         {
                           values: ["3"],
                           label: "Ground",
-                          color: [238,48,0]
+                          color: [238,190,0]
                         },
                         {
                           values: ["4"],
@@ -873,6 +881,17 @@
                           color: [0,48,238]
                         }]
                     });
+                    k++;
+                    if(k == 20){
+                      // view.ui.add(legend, "bottom-left");
+                      // view.on("add", function(event) {
+                      //   console.log($('.esri-legend__service'))
+                      //   $('.esri-legend__service').css("background-color","yellow")
+                      // })
+                      //console.log($('.esri-ui-corner-container'))
+                      $('.esri-ui-bottom-left').append(`<class="esri-component esri-legend esri-widget esri-widget--panel" style="color:#fff;"><div><div class="esri-legend__service"><div class="esri-legend__layer"><div class="esri-legend__layer-table esri-legend__layer-table--size-ramp"><div class="esri-legend__layer-caption">分类</div><div class="esri-legend__layer-body"><div class="esri-legend__layer-row"><div class="esri-legend__layer-cell esri-legend__layer-cell--symbols"><div class="esri-legend__symbol"><div style="opacity: 1;"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"><defs></defs><g transform="matrix(1,0,0,1,4.5,4.5)"><circle fill="rgba(178, 178, 178, 1)" fill-rule="evenodd" stroke="rgba(128, 128, 128, 0.5)" stroke-width="0.6666666666666666" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="none" stroke-miterlimit="4" cx="0" cy="0" r="4"></circle></g></svg></div></div></div><div class="esri-legend__layer-cell esri-legend__layer-cell--info">其它地类</div></div><div class="esri-legend__layer-row"><div class="esri-legend__layer-cell esri-legend__layer-cell--symbols"><div class="esri-legend__symbol"><div style="opacity: 1;"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"><defs></defs><g transform="matrix(1,0,0,1,4.5,4.5)"><circle fill="rgba(34, 170, 0, 1)" fill-rule="evenodd" stroke="rgba(128, 128, 128, 0.5)" stroke-width="0.6666666666666666" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="none" stroke-miterlimit="4" cx="0" cy="0" r="4"></circle></g></svg></div></div></div><div class="esri-legend__layer-cell esri-legend__layer-cell--info">高层植被</div></div><div class="esri-legend__layer-row"><div class="esri-legend__layer-cell esri-legend__layer-cell--symbols"><div class="esri-legend__symbol"><div style="opacity: 1;"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"><defs></defs><g transform="matrix(1,0,0,1,4.5,4.5)"><circle fill="rgba(160, 255, 136, 1)" fill-rule="evenodd" stroke="rgba(128, 128, 128, 0.5)" stroke-width="0.6666666666666666" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="none" stroke-miterlimit="4" cx="0" cy="0" r="4"></circle></g></svg></div></div></div><div class="esri-legend__layer-cell esri-legend__layer-cell--info">低层植被</div></div><div class="esri-legend__layer-row"><div class="esri-legend__layer-cell esri-legend__layer-cell--symbols"><div class="esri-legend__symbol"><div style="opacity: 1;"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"><defs></defs><g transform="matrix(1,0,0,1,4.5,4.5)"><circle fill="rgba(238, 190, 0, 1)" fill-rule="evenodd" stroke="rgba(128, 128, 128, 0.5)" stroke-width="0.6666666666666666" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="none" stroke-miterlimit="4" cx="0" cy="0" r="4"></circle></g></svg></div></div></div><div class="esri-legend__layer-cell esri-legend__layer-cell--info">裸地</div></div><div class="esri-legend__layer-row"><div class="esri-legend__layer-cell esri-legend__layer-cell--symbols"><div class="esri-legend__symbol"><div style="opacity: 1;"><svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"><defs></defs><g transform="matrix(1,0,0,1,4.5,4.5)"><circle fill="rgba(0, 48, 238, 1)" fill-rule="evenodd" stroke="rgba(128, 128, 128, 0.5)" stroke-width="0.6666666666666666" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="none" stroke-miterlimit="4" cx="0" cy="0" r="4"></circle></g></svg></div></div></div><div class="esri-legend__layer-cell esri-legend__layer-cell--info">水面</div></div></div></div></div></div></div></class=>`)
+                      //$('.esri-ui-corner-container').append(`<div class="esri-ui-top-left esri-ui-corner"><div class="esri-component esri-zoom esri-widget"><div class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0" title="放大"><span aria-hidden="true" role="presentation" class="esri-icon esri-icon-plus"></span><span class="esri-icon-font-fallback-text">放大</span></div><div class="esri-widget--button esri-widget esri-interactive" role="button" tabindex="0" title="缩小"><span aria-hidden="true" role="presentation" class="esri-icon esri-icon-minus"></span><span class="esri-icon-font-fallback-text">缩小</span></div></div><div class="esri-component esri-navigation-toggle esri-widget" tabindex="0" aria-label="切换以进行 3D 平移或旋转" title="切换以进行 3D 平移或旋转"><div class="esri-navigation-toggle__button esri-widget--button esri-navigation-toggle__button--pan esri-navigation-toggle__button--active"><span class="esri-icon-pan"></span></div><div class="esri-navigation-toggle__button esri-widget--button esri-navigation-toggle__button--rotate"><span class="esri-icon-rotate"></span></div></div><div class="esri-component esri-compass esri-widget--button esri-widget esri-interactive" role="button" tabindex="0" aria-label="重置罗盘仪方向" title="重置罗盘仪方向"><span aria-hidden="true" class="esri-compass__icon esri-icon-compass" style="transform: rotateZ(0deg);"></span><span class="esri-icon-font-fallback-text">重置罗盘仪方向</span></div></div>`)
+                    }
                 }
               }else if(fieldName == "ELEVATION"){
                 for(let i in pointLayers){
@@ -885,6 +904,8 @@
                       pointLayers[i].renderer = response.renderer;
                     });
                 }
+                view.ui.remove(legend);
+                $('.esri-ui-bottom-left').html('')
               }
             });
           }
@@ -1170,6 +1191,6 @@
       <input type="radio" name="renderer" value="CLASS_CODE" /> 按照类别显示&nbsp; <br />
       <input type="radio" name="renderer" value="ELEVATION" checked /> 按照高度显示&nbsp; <br />
     </div>
-    
+
   </body>
 </html>
