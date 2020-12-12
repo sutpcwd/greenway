@@ -249,7 +249,7 @@ ul,ol{
 .content .content-right .right-top{
     width: 100%;
     height: 4.2rem;
-    /* border: 1px solid #55bcd4; */
+    border: 1px solid #55bcd4;
     margin-bottom: .2rem;
 }
 .content .content-right .right-top .allnav{

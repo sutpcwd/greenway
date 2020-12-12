@@ -1310,7 +1310,7 @@ $.fn.ceshi5=function(value){
         };
         data = {
             0:{
-                0:['林地面积\n\n'+greenData[value][1]+'公顷', '植被覆盖度\n\n'+greenData[value][19]+'%',],
+                0:['林地面积\n\n'+greenData[value][1]+'公顷', '植被覆盖度\n\n'+(greenData[value][2]+greenData[value][4]).toFixed(2)+'%',],
                 1:['树高平均值\n\n'+greenData[value][17]+'m','树冠面积\n\n'+greenData[value][18]+'公顷' ]
             },
         }
